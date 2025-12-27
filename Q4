@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+
+char grid[10][10];
+int rows, cols;
+void inputGrid() {
+    cout << "Enter rows and columns: ";
+    cin >> rows >> cols;
+
+    cout << "Enter crossword grid (# for block):"<<endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> grid[i][j];
+        }
+    }
+}
+int countHorizontalWords() {
+    int count = 0;
+
+    for (int i = 0; i < rows; i++) {
+        int len = 0;
+        for (int j = 0; j < cols; j++) {
+            if (grid[i][j] != '#')
+                len++;
+            else {
+                if (len >= 3) count++;
+                len = 0;
+            }
+        }
+        if (len >= 3) count++;
+    }
+    return count;
+}
+int countVerticalWords() {
+    int count = 0;
+
+    for (int j = 0; j < cols; j++) {
+        int len = 0;
+        for (int i = 0; i < rows; i++) {
+            if (grid[i][j] != '#')
+                len++;
+            else {
+                if (len >= 3) count++;
+                len = 0;
+            }
+        }
+        if (len >= 3) count++;
+    }
+    return count;
+}
+void findLongestWord() {
+    string longest = "", current = "";
+    for (int i = 0; i < rows; i++) {
+        current = "";
+        for (int j = 0; j < cols; j++) {
+            if (grid[i][j] != '#') {
+                current += grid[i][j];
+            } else {
+                if (current.length() > longest.length())
+                    longest = current;
+                current = "";
+            }
+        }
+        if (current.length() > longest.length())
+            longest = current;
+    }
+    for (int j = 0; j < cols; j++) {
+        current = "";
+        for (int i = 0; i < rows; i++) {
+            if (grid[i][j] != '#') {
+                current += grid[i][j];
+            } else {
+                if (current.length() > longest.length())
+                    longest = current;
+                current = "";
+            }
+        }
+        if (current.length() > longest.length())
+            longest = current;
+    }
+
+    cout << "Longest word: " << longest << endl;
+}
+
+int main() {
+    inputGrid();
+
+    int h = countHorizontalWords();
+    int v = countVerticalWords();
+
+    cout << "Horizontal words: " << h << endl;
+    cout << "Vertical words: " << v << endl;
+
+    findLongestWord();
+
+    return 0;
+}
