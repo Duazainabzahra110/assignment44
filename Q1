@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+int temp[7][4];
+int sum=0;
+int avg=0;
+void tempratureInput(){
+    
+     for(int i=0; i<7; i++){
+         cout<<"Enter Temprature For Day "<<i+1<<" : "<<endl;
+         for(int j=0; j<4; j++){
+             cin>>temp[i][j];
+         }
+         cout<<endl;
+     }
+}
+void highLowTemprature(){
+    int high= temp[0][0];
+     int low=temp[0][0];
+     for(int i=1; i<7; i++){
+         for(int j=1; j<4; j++){
+             if(temp[i][j]>high)
+             high=temp[i][j];
+             if(temp[i][j]<low)
+             low=temp[i][j];
+         }
+     }
+     cout<<"The Highest Temprature is : "<<high<<endl;
+     cout<<"The Lowest Temprature is : "<<low<<endl<<endl;
+}
+
+void averageTemprature(){
+    int i;
+      for(int i=0; i<7; i++){
+          sum=0;
+          for(int j=0; j<4; j++){
+              sum=sum +temp[i][j];
+          }
+          int avg=sum/4;
+          cout<<"The Average Temprature For Day "<<i+1<<" : "<<avg<<endl;
+      }
+}
+int main() {
+    tempratureInput();
+    highLowTemprature();
+    averageTemprature();
+    return 0;
+}
